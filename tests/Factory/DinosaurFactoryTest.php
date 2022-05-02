@@ -92,7 +92,7 @@ class DinosaurFactoryTest extends TestCase
         $this->assertSame($expectedIsCarnivorous, $dinosaur->isCarnivorous(), 'Diet does not match');
     }
 
-
+    // Data for testItGrowsADinosaurFromASpecification
     public function getSpecificationTests()
     {
         return [
@@ -102,16 +102,16 @@ class DinosaurFactoryTest extends TestCase
         ];
     }
 
-    /*
-    * @dataProvider getHugeDinosaurSpecTest
-    */
+    /**
+     * @dataProvider getHugeDinosaurSpecTest 
+     */
     public function testItGrowsAHugeDinosaur(string $specification)
     {
         $dinosaur = $this->factory->growFromSpecification($specification);
         $this->assertGreaterThanOrEqual(Dinosaur::HUGE, $dinosaur->getLength());
 
     }
-
+    // Data for testItGrowsAHugeDinosaur
     public function getHugeDinosaurSpecTest()
     {
         return [
