@@ -6,11 +6,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity]
-#[ORM\Table(name: "enclosure")]
+#[ORM\Entity(repositoryClass: EnclosureRepository::class)]
 class Enclosure
 {
-    #[ORM\OneToMany(targetEntity:"App\Entity\Dinosaur", mappedBy: "enclosure", casade: "persist")]
+
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private $id;
+
+    #[ORM\OneToMany(targetEntity:"App\Entity\Dinosaur", mappedBy: "enclosure", cascade: ["persist"])]
     private $dinosaurs;
 
     public function __construct()
@@ -21,5 +26,10 @@ class Enclosure
     public function getDinosaurs(): Collection
     {
         return $this->dinosaurs;
+    }
+
+    public function addDinosaur(Dinosaur $dinosaur): void
+    {
+        $this->dinosaurs[] = $dinosaur;
     }
 }
